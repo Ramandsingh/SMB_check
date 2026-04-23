@@ -17,6 +17,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Write .env from secrets
+        working-directory: smb-audit
+        run: |
+          cat > .env << EOF
+          DATABASE_URL="${{ secrets.DATABASE_URL }}"
+          MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}"
+          MYSQL_USER="${{ secrets.MYSQL_USER }}"
+          MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}"
+          SITE_PASSWORD="${{ secrets.SITE_PASSWORD }}"
+          OPENROUTER_API_KEY="${{ secrets.OPENROUTER_API_KEY }}"
+          EOF
+
       - name: Stop existing containers
         working-directory: smb-audit
         run: docker compose down --remove-orphans || true
@@ -28,4 +40,4 @@ jobs:
       - name: Verify running
         run: |
           sleep 5
-          docker ps | grep smb-audit-app && echo "App is running" || echo "WARNING: App container not found"
+          docker ps | grep smb-audit-app && echo "✅ App is running" || echo "❌ WARNING: App container not found"
