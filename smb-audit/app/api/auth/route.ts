@@ -12,10 +12,11 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Invalid password' }, { status: 401 })
   }
 
+  const isHttps = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false
   const cookieStore = await cookies()
   cookieStore.set('audit_token', expected, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: isHttps,
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 30,
     path: '/',
