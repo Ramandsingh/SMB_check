@@ -1,0 +1,31 @@
+name: Deploy to MBserver
+
+on:
+  push:
+    branches:
+      - main
+      - claude/audit-joinery-business-exX2e
+    paths:
+      - 'smb-audit/**'
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: [self-hosted, macOS, X64]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Stop existing containers
+        working-directory: smb-audit
+        run: docker compose down --remove-orphans || true
+
+      - name: Build and start
+        working-directory: smb-audit
+        run: docker compose up -d --build
+
+      - name: Verify running
+        run: |
+          sleep 5
+          docker ps | grep smb-audit-app && echo "App is running" || echo "WARNING: App container not found"
