@@ -14,6 +14,7 @@ export async function POST(request: Request) {
 
   const isHttps = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false
   const cookieStore = await cookies()
+  const isHttps = process.env.NEXT_PUBLIC_APP_URL?.startsWith('https') ?? false
   cookieStore.set('audit_token', expected, {
     httpOnly: true,
     secure: isHttps,
