@@ -170,7 +170,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <div>
-                <div className="font-semibold text-gray-900 text-sm">SMB Audit Tool by Raman</div>
+                <div className="font-semibold text-gray-900 text-sm">SMB Audit Tool</div>
                 <div className="text-xs text-gray-400">Business Lending Assessments</div>
               </div>
             </div>
