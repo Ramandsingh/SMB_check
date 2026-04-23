@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SMB Audit — Joinery Business Assessment",
-  description: "Business lending assessment tool for joinery businesses",
+  title: "SMB Audit Tool by Raman",
+  description: "Business lending assessment tool by Raman",
 };
 
 export default function RootLayout({
