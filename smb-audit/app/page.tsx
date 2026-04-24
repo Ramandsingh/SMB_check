@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
+import Link from 'next/link'
 import { Domain, SavedAudit } from '@/types'
 import { DOMAIN_META } from '@/lib/questions'
 import { calcScores, RECOMMENDATION_LABELS, scoreColor } from '@/lib/scoring'
@@ -174,12 +175,20 @@ export default function DashboardPage() {
                 <div className="text-xs text-gray-400">Business Lending Assessments</div>
               </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="px-3 py-1.5 text-xs border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50 transition-colors"
-            >
-              Sign out
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/notes"
+                className="px-3 py-1.5 text-xs border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50 transition-colors"
+              >
+                Project Notes
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1.5 text-xs border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50 transition-colors"
+              >
+                Sign out
+              </button>
+            </div>
           </div>
         </header>
 

@@ -37,6 +37,15 @@ jobs:
         working-directory: smb-audit
         run: docker compose up -d --build
 
+      - name: Run DB migrations
+        working-directory: smb-audit
+        run: |
+          sleep 5
+          for f in sql/migrate_*.sql; do
+            echo "Running migration: $f"
+            docker compose exec -T db mysql -u"${{ secrets.MYSQL_USER }}" -p"${{ secrets.MYSQL_PASSWORD }}" smb_audit < "$f"
+          done
+
       - name: Verify running
         run: |
           sleep 5
